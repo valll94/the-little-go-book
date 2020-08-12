@@ -1041,21 +1041,23 @@ b := make([]*Saiyan, 10)
 
 Има случаи, които не са обхванати, но вероятността е малка да се сблъскате с тях. И ако го направите, надяваме се, че основите, които сме построили тук, ще ви позволи да разберете какво се случва.
 
-# Chapter 4 - Code Organization and Interfaces
+# Глава 4 - Организация на код и интерфейси
 
-It's now time to look at how to organize our code.
+Време е да разгледаме как да организираме кода си.
 
-## Packages
+## Пакети
 
-To keep more complicated libraries and systems organized, we need to learn about packages. In Go, package names follow the directory structure of your Go workspace. If we were building a shopping system, we'd probably start with a package name "shopping" and put our source files in `$GOPATH/src/shopping/`.
+За да запазим сложните библиотеки и системи организирани, ще използваме пакети. В Go, имената на пакетите следват структората на директорията. Например, ако правим система за пазаруване, името на пакета ще излгежда по следният начин `$GOPATH/src/shopping/`.
 
-We don't want to put everything inside this folder though. For example, maybe we want to isolate some database logic inside its own folder. To achieve this, we create a subfolder at `$GOPATH/src/shopping/db`. The package name of the files within this subfolder is simply `db`, but to access it from another package, including the `shopping` package, we need to import `shopping/db`.
+Но не искаме целият ни код да бъде в една папка. Например, може да изолираме логиката на базата данни в друга папка. За да постигнем това, ще направим попдпапка например `$GOPATH/src/shopping/db`. Името на пакета ще бъде просто `db`, но ако искаме да го достъпим от друг пакет, ще трябва да вкараме цялото име `shopping/db`.
 
-In other words, when you name a package, via the `package` keyword, you provide a single value, not a complete hierarchy (e.g., "shopping" or "db"). When you import a package, you specify the complete path.
+С други думи, когато наименоваме пакет, използваме само една дума, но когато искаме да го вмъкнем като пакет, използваме целият път. 
 
-Let's try it. Inside your Go workspace's `src` folder (which we set up in Getting Started of the Introduction), create a new folder called `shopping` and a subfolder within it called `db`.
+Нека да опитаме. В нашата работна директория `src` ( която конфигурирахме по-рано в главата Въведение), създаваме нова папка наречена `shopping` и подпапка с името `db`.
 
-Inside of `shopping/db`, create a file called `db.go` and add the following code:
+
+
+В директорията `shopping/db`, създаваме файл с името`db.go` и поставяме следният код:
 
 ```go
 package db
@@ -1071,9 +1073,9 @@ func LoadItem(id int) *Item {
 }
 ```
 
-Notice that the name of the package is the same as the name of the folder. Also, obviously, we aren't actually accessing the database. We're just using this as an example to show how to organize code.
+Забележете, че името на пакета е същото, като папката. Очевидно, не достъпваме базата, просто използваме пример как се организира кода. 
 
-Now, create a file called `pricecheck.go` inside of the main `shopping` folder. Its content is:
+Сега, нека създадем файл наречен `pricecheck.go` в главната директория `shopping`. И това е неговто съдържание:
 
 ```go
 package shopping
